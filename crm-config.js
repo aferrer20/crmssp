@@ -20,5 +20,10 @@ window.__CRM = {
   ICON:         '📦',
   ACCENT:       '#3b82f6',   // SSP = blue
   ACCENT2:      '#2563eb',
-  BTN_TEXT:     '#ffffff'
+  BTN_TEXT:     '#ffffff',
+
+  // ---- Sibling workspace (owner-only switch link) ----
+  OTHER_COMPANY: 'chiefneg',
+  OTHER_NAME:    'The Chief Negotiators',
+  OTHER_URL:     'https://cncrm.thechiefnegotiators.com'
 };
