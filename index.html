@@ -2,41 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <script>
-/* __cn_storage_guard — injected at deploy time.
-   1) Prevents localStorage QuotaExceededError from crashing the app: on a
-      quota hit it drops ONLY cloud-backed document blobs (cn-documents*),
-      never opportunity/override caches (cn-opp*), then retries once and
-      finally swallows so the app's cloud path continues.
-   2) Defines heatOpen/setHeatOpen globals as a crash safety net. */
-(function(){
-  try {
-    if (typeof window.heatOpen === 'undefined') window.heatOpen = false;
-    if (typeof window.setHeatOpen === 'undefined') window.setHeatOpen = function(){};
-  } catch(e){}
-  try {
-    var ls = window.localStorage;
-    if (ls && ls.setItem && !ls.__cn_guarded) {
-      var _set = ls.setItem.bind(ls);
-      ls.setItem = function(k, v){
-        try { return _set(k, v); }
-        catch(e){
-          try {
-            var drop = [];
-            for (var i=0;i<ls.length;i++){ var key=ls.key(i); if(key && key.indexOf('cn-documents')===0) drop.push(key); }
-            drop.sort(function(a,b){ return (ls.getItem(b)||'').length - (ls.getItem(a)||'').length; });
-            for (var j=0;j<drop.length;j++){ try{ ls.removeItem(drop[j]); }catch(_){}
-              try { return _set(k, v); } catch(_e){} }
-          } catch(_){}
-          return undefined;
-        }
-      };
-      try { Object.defineProperty(ls, '__cn_guarded', {value:true, enumerable:false}); } catch(_){}
-    }
-  } catch(e){}
-})();
-</script>
-
   <title>Strategic Supply Partners · CRM</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
